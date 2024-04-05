@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <!-- Add your CSS styles here -->
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        form {
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select,
+        button[type="submit"],
+        input[type="number"],
+        input[type="checkbox"] {
+            width: auto;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none; /* Added border: none; */
+            border-radius: 5px; /* Added border-radius: 5px; */
+            padding: 10px 20px; /* Added padding: 10px 20px; */
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .paymentButton { /* Added this class */
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 20px; /* Added margin-top: 20px; */
+        }
+        .paymentButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Cygnus Registration Form</h2>
+        <form id="registrationForm" method="post" action="https://script.google.com/macros/s/AKfycbxt1l95LnBmTYzd0X9cVGjT_ArnriXGp36_NhvXtVVAH4EKp7GKiysk1T_zpokKLYjPPQ/exec">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <label for="college">College:</label>
+            <input type="text" id="college" name="college" required>
+            <label for="collegeId">College ID (Registration/Roll Number):</label>
+            <input type="text" id="collegeId" name="collegeId" required>
+            <label for="department">Department:</label>
+            <input type="text" id="department" name="department" required>
+            <label>Select events you are willing to participate in:</label><br>
+            <label for="brain_buster">
+                <input type="checkbox" id="brain_buster" name="events[]" value="brain_buster">
+                Brain Buster
+            </label>
+            <label for="clash_of_minds">
+                <input type="checkbox" id="clash_of_minds" name="events[]" value="clash_of_minds">
+                Clash of Minds
+            </label>
+            <label for="circuit_debugging">
+                <input type="checkbox" id="circuit_debugging" name="events[]" value="circuit_debugging">
+                Circuit Debugging
+            </label>
+            <label for="paper_presentation">
+                <input type="checkbox" id="paper_presentation" name="events[]" value="paper_presentation">
+                Paper Presentation
+            </label>
+            <label for="hall_of_war">
+                <input type="checkbox" id="hall_of_war" name="events[]" value="hall_of_war">
+                Hall of War
+            </label>
+            <label for="food_feast">
+                <input type="checkbox" id="food_feast" name="events[]" value="food_feast">
+                Food Feast
+            </label>
+            <label for="talent" style="color: blue;">Show Your Talent:</label>
+            <label for="photography">
+                <input type="checkbox" id="photography" name="events[]" value="photography">
+                Photography
+            </label>
+            <label for="singing">
+                <input type="checkbox" id="singing" name="events[]" value="singing">
+                Singing
+            </label>
+            <label for="dance">
+                <input type="checkbox" id="dance" name="events[]" value="dance">
+                Dance
+            </label>
+            <label for="silambam">
+                <input type="checkbox" id="silambam" name="events[]" value="silambam">
+                Silambam
+            </label>
+            <label for="Other">
+                <input type="checkbox" id="Other" name="events[]" value="Other">
+                Other
+            </label>
+            <!-- Add other checkbox inputs here -->
+            <div id="totalAmount"></div>
+            <button type="button" id="fetchAmountButton" class="paymentButton" onclick="fetchAmount()">Fetch Amount</button>
+            <div id="qrCodeContainer" style="display: none;">
+                <label for="qrCode">QR Code for Payment:</label><br>
+                <img id="qrCode" src="" alt="QR Code">
+            </div>
+            <button type="button" id="upiPaymentButton" class="paymentButton" onclick="proceedToPayment()">Proceed to Payment</button>
+            <label for="upiId">Your UPI ID:</label>
+            <input type="text" id="upiId" name="upiId" required>
+            <label for="transactionNumber">Transaction Number:</label>
+            <input type="text" id="transactionNumber" name="transactionNumber" required>
+            <br><button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                fetchAmount();
+            });
+        });
+
+        async function fetchAmount() {
+            generateQR();
+        }
+
+        async function generateQR() {
+            const formData = new FormData(document.getElementById('registrationForm'));
+            const totalAmount = calculateTotal(formData);
+            const qrCode = document.getElementById('qrCode');
+            const qrCodeContainer = document.getElementById('qrCodeContainer');
+            const totalAmountContainer = document.getElementById('totalAmount');
+            const qrData = `upi://pay?pa=magesh17032003@oksbi&pn=Mageshkumar%20K&am=${totalAmount}&cu=INR&aid=uGICAgMCy_PLaYw`;
+
+            qrCodeContainer.style.display = 'block';
+            qrCode.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qrData)}&size=150x150&margin=0`;
+            totalAmountContainer.textContent = `Total Amount Payable: Rs. ${totalAmount}`;
+        }
+
+        function proceedToPayment() {
+            const upiId = document.getElementById('upiId').value;
+            const totalAmount = document.getElementById('totalAmount').textContent.replace('Total Amount Payable: Rs. ', '');
+            const transactionNumber = document.getElementById('transactionNumber').value;
+            const paymentLink = `upi://pay?pa=magesh17032003@oksbi&pn=Mageshkumar%20K&am=${totalAmount}&cu=INR&tid=${transactionNumber}&aid=uGICAgMCy_PLaYw`;
+            window.location.href = paymentLink;
+        }
+
+        function calculateTotal(formData) {
+        let total = 0;
+        const events = formData.getAll('events[]');
+    
+        if (events.includes("food_feast") && events.length === 1) {
+            total = 200; // Only Food Feast selected, total is Rs. 200
+        } else if (events.includes("food_feast")) {
+            total = 250; // Food Feast and other events selected, total is Rs. 250
+        } else {
+            total = 50; // Other events selected, total is Rs. 50
+        }
+    
+        return total;
+        }
+
+
+        // Function to check if all fields are filled
+        function areAllFieldsFilled() {
+            const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
+            for (let i = 0; i < inputs.length; i++) {
+                if (inputs[i].value === "") {
+                    return false; // Return false if any field is empty
+                }
+            }
+            return true; // Return true if all fields are filled
+        }
+
+        // Form submission function
+        function submitForm(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            if (areAllFieldsFilled()) {
+                // All fields are filled, redirect to success.html
+                window.location.href = "success.html";
+            } else {
+                // Display message to fill all fields
+                alert("Please fill all fields.");
+            }
+        }
+
+        // Add submit event listener to the form
+        document.getElementById('registrationForm').addEventListener('submit', submitForm);
+    </script>
+</body>
+</html>

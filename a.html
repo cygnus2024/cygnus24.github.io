@@ -1,0 +1,1434 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYGNUS'24</title>
+
+
+
+
+    <style>
+        .move_right {
+     /* Set display to block to make them appear on new lines */
+     /* You can adjust the margin to set the desired gap between the div elements */
+            margin-left: auto;
+            column-count: 1;
+  
+        }
+    </style>
+
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anta&family=Bungee+Shade&family=DM+Serif+Display:ital@0;1&family=Honk&family=Kaushan+Script&family=Kdam+Thmor+Pro&family=Luckiest+Guy&family=Nosifer&family=Rock+Salt&family=Rubik+Doodle+Shadow&family=Rubik+Mono+One&family=Ruslan+Display&family=Rye&family=Stalinist+One&family=Timmana&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+<link href="load.html" rel="load">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Protest+Guerrilla&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+
+ <!-- Menu Section -->
+
+<style>
+  @import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700");
+
+
+  @mixin sp-layout {
+    @media screen and (max-width: 750px) {
+      @content;
+    }
+  }
+
+  @mixin pc-layout {
+    @media screen and (min-width: 751px) {
+      @content;
+    }
+  }
+
+  #burger-toggle {
+    display: none;
+  }
+
+  .menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #1a1e23;
+    z-index: 100;
+    display: none;
+  }
+
+  .menu-inner {
+    padding: 20px;
+  }
+
+  .menu-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-nav-item {
+    margin-bottom: 10px;
+    text-align-last: center;
+   margin: 50px;
+
+  }
+
+  .menu-nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  .burger-menu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 101;
+  }
+
+  #burger-toggle {
+    display: none;
+  }
+
+  @import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700");
+
+@mixin sp-layout {
+  @media screen and (max-width: 750px) {
+    @content;
+  }
+}
+
+@mixin pc-layout {
+  @media screen and (min-width: 751px) {
+    @content;
+  }
+}
+
+
+#burger-toggle {
+  position: absolute;
+  appearance: none;
+  opacity: 0;
+
+  &:checked {
+    & ~ .menu {
+      opacity: 1;
+      visibility: visible;
+
+      .menu-nav-link span div,
+      img,
+      .title p {
+        transform: translateY(0);
+        transition: 1.2s 0.1s cubic-bezier(0.35, 0, 0.07, 1);
+      }
+
+      .image-link {
+        @for $i from 1 through 4 {
+          &:nth-child(#{$i}) img {
+            transition-delay: 0.1s + 0.08s * $i;
+          }
+        }
+      }
+    }
+
+    & ~ .burger-menu {
+      .line {
+        &::after {
+          transform: translateX(0);
+        }
+
+        &:nth-child(1) {
+          transform: translateY(calc(var(--burger-menu-radius) / 5))
+            rotate(45deg);
+        }
+
+        &:nth-child(2) {
+          transform: scaleX(0);
+        }
+
+        &:nth-child(3) {
+          transform: translateY(calc(var(--burger-menu-radius) / -5))
+            rotate(-45deg);
+        }
+      }
+    }
+  }
+}
+
+.burger-menu {
+  --burger-menu-radius: 4em;
+
+  position: fixed;
+  top: 5vh;
+  left: 5vw;
+  z-index: 100;
+  display: block;
+  width: var(--burger-menu-radius);
+  height: var(--burger-menu-radius);
+  outline: none;
+  cursor: pointer;
+
+  .line {
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    height: 3px;
+    background: hsl(0, 0%, 100%);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.5s;
+
+    &:nth-child(1) {
+      top: 30%;
+    }
+
+    &:nth-child(2) {
+      top: 50%;
+    }
+
+    &:nth-child(3) {
+      top: 70%;
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--primary-color-darker);
+      transform: translateX(-100%);
+      transition: 0.25s;
+    }
+
+    @for $i from 2 through 3 {
+      &:nth-child(#{$i})::after {
+        transition-delay: 0.1s * ($i - 1);
+      }
+    }
+  }
+
+  &:hover {
+    .line::after {
+      transform: translateX(0);
+    }
+  }
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1a1e23;
+  opacity: 0;
+  overflow-x: hidden;
+  visibility: hidden;
+  transition: 0.3s;
+
+  @include sp-layout {
+    display: block;
+  }
+
+  &-nav {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    list-style-type: none;
+
+    @include sp-layout {
+      flex-direction: column;
+    }
+
+    &-item {
+      flex: 1;
+    }
+
+    &-link {
+      position: relative;
+      display: inline-flex;
+      font-size: 2rem;
+      color: white;
+      text-decoration: none;
+
+      span {
+        overflow: hidden;
+
+        div {
+          transform: translateY(102%);
+        }
+      }
+
+      &::after {
+        position: absolute;
+        content: "";
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--primary-color);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.5s;
+      }
+
+      &:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+
+  .gallery {
+    margin-top: 60px;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 24px;
+    color: white;
+    overflow: hidden;
+
+    p {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: translateY(102%);
+    }
+  }
+
+  .images {
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+
+    @include sp-layout {
+      justify-content: center;
+    }
+
+    .image-link {
+      width: 15vw;
+      margin: 0 12px;
+      overflow: hidden;
+
+      @include sp-layout {
+        width: 40vw;
+        margin: 0 12px 12px 0;
+      }
+
+      .image {
+        position: relative;
+        transition: 0.6s;
+
+        &::before {
+          position: absolute;
+          content: attr(data-label);
+          top: 0;
+          left: 0;
+          z-index: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          color: white;
+          background: rgba(0, 0, 0, 0.6);
+          opacity: 0;
+          transition: 0.4s;
+        }
+      }
+
+      &:hover .image {
+        transform: scale(1.2);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+
+    img {
+      height: 250px;
+      transform: translateY(102%);
+    }
+  }
+}
+</style>
+</head>
+<body>
+
+
+
+<style>
+  @import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700");
+
+
+  @mixin sp-layout {
+    @media screen and (max-width: 750px) {
+      @content;
+    }
+  }
+
+  @mixin pc-layout {
+    @media screen and (min-width: 751px) {
+      @content;
+    }
+  }
+
+  #burger-toggle {
+    display: none;
+  }
+
+  .menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #1a1e23;
+    z-index: 100;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Fade-in/out transition */
+  }
+
+  .menu.show {
+    display: block;
+    opacity: 1;
+  }
+
+  .menu-inner {
+    padding: 20px;
+  }
+
+  .menu-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-nav-item {
+    margin-bottom: 10px;
+    text-align-last: center;
+    margin: 50px;
+    opacity: 0;
+    transform: translateY(20px); /* Initial position for sliding animation */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Slide and fade transition */
+  }
+
+  .menu-nav-item.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .menu-nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  .burger-menu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 101;
+  }
+
+  #burger-toggle {
+    display: none;
+  }
+</style>
+</head>
+
+
+<input type="checkbox" id="burger-toggle">
+<label for="burger-toggle" class="burger-menu">
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+</label>
+<div class="menu">
+  <div class="menu-inner">
+    <ul class="menu-nav">
+      <li class="menu-nav-item"><a class="menu-nav-link" href="#home"><span>Home</span></a></li>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="#about"><span>About</span></a></li>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="#technical-events"><span>Technical Events</span></a></li>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="#non-technical-events"><span>Non-Technical Events</span></a></li>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="#general guidlines"><span>General Guidlines</span></a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+<!--HOME PAGE-->
+
+<style> 
+  .move_right {
+/* ... */
+z-index: 1; /* Adjust as needed */
+}
+
+/* Adjust z-index for other elements if necessary */
+
+#herotext,
+#img_part,
+.countdown-body,
+.container,
+.wrapper,
+.myfooter {
+z-index: 2; /* Adjust as needed */
+}
+
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+  </style>
+  <video autoplay muted loop>
+    <source src="/img/25.mp4" type="video/mp4">
+  </video>
+
+
+    <div class='container'>
+        <div id='herotext'>
+          <div id="home">
+            <!-- Home content here -->
+          
+            <div data-aos='fade-down' data-aos-once=true data-aos-duration="1000">
+              <br><br><br><br>
+              <h3 class="stalinist-one-regular" style="text-align: center; color: rgb(6, 231, 235);font-weight: bolder;font-size: 20px; text-shadow: 2px 2px 4px #ac48db;"> ELECTRICAL AND ELECTRONICS ENGINEERING</h3><br> 
+              <h3 class=".unbounded-uniquifier" style="text-align: center; color: rgb(236, 147, 14);font-size: 18px;-webkit-text-stroke: 2px">PROUDLY PRESENTS</h3><br>
+          </div>
+          <div style="text-align: center; height: 300px; margin-bottom: 70px;" id="img_part">
+            <h3 class=".unbounded-uniquifier" style="text-align: center; color: rgb(234, 218, 4); font-size: 30px; text-shadow: 2px 2px 4px #487381;"><b>A NATIONAL LEVEL SYMPOSIUM</b></h3>
+            <img src="/img/lo1.png" alt="Gaming fonts" class="no-hover-effect" style="width: 600px; height: 468px;margin-top: -85px;margin-left: -45px;">
+        </div>
+        
+          <br><br><br>
+
+
+<!--REGISTER NOW-->
+
+
+    <style>
+        /* FUTURISTIC U.I. SERIES */
+ /* Centering container */
+ .custom-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 1.5vh;
+            margin-bottom: 1.5vh;
+        }
+
+        /* Rest of the CSS */
+        /* FUTURISTIC U.I. SERIES */
+        h1 {
+            margin: 50px 0 0 0;
+            color: rgba(50,50,50,1);
+            text-align: center;
+            text-shadow: 
+                1px 0px 0px rgba(35, 231, 214, 1),
+                -1px 0px 0px rgba(210, 17, 50, 1);
+            font-family: 'Ubuntu Condensed', sans-serif;
+        }
+
+        /* FUTURISTIC BUTTON */
+        .futuristic-button {
+            height: 60px;
+            width: 280px;
+            position: relative;
+            cursor: pointer;
+        }
+
+
+        .futuristic-button:before {
+            content:"";
+            height: 50px;
+            position:absolute; 
+            z-index:-1;
+            box-shadow:0 0 5px rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.4);
+            top: 2px;
+            bottom:0;
+            left:10px;
+            right:10px;
+            border-radius: 100%;
+        } 
+
+        .top, .bottom, .parallelogram-left, .parallelogram-right, .button-text {
+            width: 100%;
+            background: rgba(56,134,133,1);
+        }
+
+        .top, .bottom {
+            height: 20px;
+            position: relative;
+            z-index: 10;
+            transition: all .5s;
+        }
+
+        .top {
+            top: 0px; 
+            left: calc(50% - 140px - 20px);
+            border-top-left-radius: 5px;
+            background: rgba(39,94,93,1);
+            background: -moz-linear-gradient(-45deg, rgba(39,94,93,1) 0%, rgba(56,134,133,1) 100%);
+            background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(39,94,93,1)), color-stop(100%, rgba(56,134,133,1)));
+            background: -webkit-linear-gradient(-45deg, rgba(39,94,93,1) 0%, rgba(56,134,133,1) 100%);
+            background: -o-linear-gradient(-45deg, rgba(39,94,93,1) 0%, rgba(56,134,133,1) 100%);
+            background: -ms-linear-gradient(-45deg, rgba(39,94,93,1) 0%, rgba(56,134,133,1) 100%);
+            background: linear-gradient(135deg, rgba(39,94,93,1) 0%, rgba(56,134,133,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#275e5d', endColorstr='#388685', GradientType=1 );
+        }
+
+        .bottom {
+            top: 10px;
+            left: calc(50% - 140px + 20px);
+            border-bottom-right-radius: 5px;
+            border-right: 1px solid rgba(39,94,93,1);
+            border-bottom: 1px solid rgba(39,94,93,1);
+            background: rgba(56,134,133,1);
+            background: -moz-linear-gradient(-45deg, rgba(56,134,133,1) 0%, rgba(39,94,93,1) 100%);
+            background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(56,134,133,1)), color-stop(100%, rgba(39,94,93,1)));
+            background: -webkit-linear-gradient(-45deg, rgba(56,134,133,1) 0%, rgba(39,94,93,1) 100%);
+            background: -o-linear-gradient(-45deg, rgba(56,134,133,1) 0%, rgba(39,94,93,1) 100%);
+            background: -ms-linear-gradient(-45deg, rgba(56,134,133,1) 0%, rgba(39,94,93,1) 100%);
+            background: linear-gradient(135deg, rgba(56,134,133,1) 0%, rgba(39,94,93,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#388685', endColorstr='#275e5d', GradientType=1 );
+        }
+
+        .parallelogram-left, .parallelogram-right {
+            transition: all .5s;
+            height: 30px;
+            position: absolute ;
+            -webkit-transform: skew(40deg);
+            -moz-transform: skew(40deg);
+            -o-transform : skew(40deg);
+        }
+
+        .parallelogram-left {
+            top: 20px;
+            left: calc(50% - 140px - 6px);
+            border-bottom: 1px solid rgba(39,94,93,1);
+            border-left: 1px solid rgba(39,94,93,1);
+        }
+
+        .parallelogram-right {
+            top: 0px;
+            left: calc(50% - 140px + 7px);
+            border-right: 1px solid rgba(39,94,93,1);
+        }
+
+        .button-text {
+            color: rgb(177, 225, 19);
+            font-size: 24px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight:bolder;
+            position: absolute;
+            top: -1px;
+            background: transparent !important;
+            text-align: center;
+            left: calc(50% - 140px);
+            z-index: 11;
+        }
+
+        /* FUTURISTIC BUTTON BORDER */
+        .top::after {
+            content: "";
+            width: 307px;
+            height: 30px;
+            position: absolute;
+            top: -10px;
+            left: calc(50% - 140px - 10px);
+            border-top-left-radius: 5px;
+            border-top: 3px solid rgba(39,94,93,1);
+            border-left: 3px solid rgba(39,94,93,1);
+        }
+
+        .bottom::after {
+            content: "";
+            width: 307px;
+            height: 30px;
+            position: absolute;
+            top: 0px;
+            left: calc(50% - 140px - 17px);
+            border-bottom-right-radius: 5px;
+            border-bottom: 3px solid rgba(39,94,93,1);
+            border-right: 3px solid rgba(39,94,93,1);
+            
+        }
+
+        .parallelogram-left::after {
+            content: "";
+            height: 40px;
+            position: absolute;
+            top: 2px;
+            left: calc(50% - 140px - 14px);
+            border-left: 3px solid rgba(39,94,93,1);
+        }
+
+        .parallelogram-right::after {
+            content: "";
+            height: 40px;
+            position: absolute;
+            top: -10px;
+            left: calc(50% + 140px + 10px );
+            border-right: 3px solid rgba(39,94,93,1);
+        }
+
+        /* FUTURISTIC BUTTON ANIMATION */
+        .top.active {
+             transition: all .5s;
+             left: -400%;
+        }
+
+         .bottom.active {
+              transition: all .5s;
+              left: +400%;
+        }
+
+
+        .parallelogram-left.active {
+            transition: all .5s;
+            left: calc(50% - 140px + 7px);
+        }
+
+        .parallelogram-right.active {
+            transition: all .5s;
+            left: calc(50% - 140px - 7px);
+        }
+    </style>
+
+<body>
+ 
+    <div class="custom-container">
+        <a href="https://forms.gle/XuSq7S3knP4n4GTE6" style="text-decoration: none;">
+            <div class="futuristic-button">
+                <div class="top"></div>
+                <div class="parallelogram-left"></div>
+                <div class="parallelogram-right"></div>
+                <div class="bottom"></div>
+                <p class="button-text">Register Now!!</p>
+            </div>
+        </a>
+    </div>
+</body>
+
+
+<!--IMAGE HOVER EFFECT-->
+
+
+              <style>
+                body {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0;
+                    background-color: #111;
+                }
+        
+                img {
+                    width: 300px;
+                    height: 300px;
+                    transition: transform 0.5s, filter 0.5s;
+                    
+                }
+        
+                img:hover {
+                    transform: scale(1.2);
+                    filter: brightness(1.5) drop-shadow(0 0 10px rgba(0, 255, 255, 0.8));
+                }
+                .no-hover-effect:hover {
+            transform: none;
+            filter: none;
+        }
+            </style>
+
+        
+
+        <!--COUNTDOWN SECTION-->
+
+
+    <div class="countdown-body">
+    <div class="header">
+        <p >THE REGISTRATION ENDS!!!</p>
+    </div> <br> <br><br> <br><br> <br>
+    <div class="counter">
+        <div class="days" >
+            <div class="box" id="days">08</div>
+            <p>DAYS</p>
+        </div>
+        <div class="hours" >
+            <div class="box" id="hours">23</div>
+            <p>HOURS</p>
+        </div>
+        <div class="minutes" >
+            <div class="box" id="minutes">55</div>
+            <p>MINUTES</p>
+        </div>
+        <div class="seconds" >
+            <div class="box" id="seconds">41</div>
+            <p>SECONDS</p>
+        </div>
+
+    </div>
+
+</div> 
+<script src="script.js"></script> 
+
+
+
+ <!-- ABOUT THE EVENT -->
+
+
+    <div class="container">
+      <br><br>  <br><br> <br><br> <br><br> <br><br>  <h2  class="extraBold gradient0" style="text-align: center; color: rgb(234, 255, 0); background: linear-gradient(to right, #004084, #ac48db);font-weight: bolder;">About the Event</h2><br>
+        <div class="row justify-content-between">
+            <div class="col-md-6 text-center">
+                <img src="img/mainposter.jpeg" alt="" ; class="columnImage"  style="position:relative; z-index:10015; margin-top: 7%; margin-bottom: 7%; height: 400px;";>
+            </div> 
+            <div class="col-md-6 columnText" style="color: rgb(255, 255, 255); font-weight: bolder;">
+              <p class="" style="text-align: justify; margin-top: 50px;">
+                  CYGNUS is a National level technical symposium that is conducted every year by the Department of ELECTRICAL AND ELECTRONICS ENGINEERING. This symposium serves as a platform for discussing upcoming trends, exploring the latest technological advancements,
+                  and sharing innovative research. Imagine a world where technical prowess meets boundless fun. Here are 8 events spanning various domains that infuse technology with excitement and joy. All these events will feature guest speakers
+                  and experts who will share their knowledge and insights with the attendees. This symposium plays a crucial role in bridging the academic and industrial gap which contributes to the advancement of innovation and technology in ELECTRICAL AND ELECTRONICS ENGINEERING.
+              </p>
+          </div>
+          
+        </div>
+    </div>
+ 
+    <div class="myFlex" id="socialMediaSection" style="text-align: center; color: rgb(0, 485, 255); font-weight: bolder;">
+        <i onclick="window.open('https://www.instagram.com/cygnus_2024_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==').focus();" class="socialMediaIcons bi bi-instagram gradient1"></i>
+        Instagram
+        <i onclick="window.open('https://maps.app.goo.gl/bfpLHtMyNWC3MhDX9', '_blank').focus();" class="socialMediaIcons bi bi-geo-alt-fill gradient1" ;></i>
+        Location
+    </div>
+    
+</div>
+</div>
+</div><br><br><br>
+
+
+
+  <!-- Technical events content here -->
+
+    <div id="aboutdiv" class="container">
+      <div id="technical-events">
+        <h2  class="extraBold gradient0" style="text-align: center; color: rgb(234, 255, 0);font-weight: bolder; font-style: normal;
+        font-size: 25px;
+        background: linear-gradient(to right, #004084, #ac48db);
+        padding: 10px;
+        border-radius: 5px; display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            ">Techincal Events</h2> </div> </div>
+   
+
+ <style>
+        * 
+        header {
+            font-style: italic;
+            font-size: 40px;
+            color: white;
+            font-weight: bolder; 
+            -webkit-text-stroke: 2px;
+            margin-bottom: 20px; /* Added space below the header */
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            width: 70%;
+            justify-content: space-between;
+        }
+
+        .card {
+            width: 280px;
+            height: 360px;
+            border-radius: 15px;
+            padding: 1.5rem;
+            background: white;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            transition: 0.4s ease-out;
+            box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+       
+        .card:nth-child(3),
+        .card:nth-child(4),
+        .card:nth-child(5) {
+            width: 280px;
+            height: 360px;
+            margin-top: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(20px);
+        }
+
+        .card:hover:before {
+            opacity: 1;
+        }
+
+        .card:hover .info {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        .card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2;
+            transition: 0.5s;
+            opacity: 0;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 15px;
+        }
+
+        .card .info {
+            position: relative;
+            z-index: 3;
+            color: white;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.5s;
+
+        }
+
+        .card .info h1 {
+            margin: 0px;
+        }
+
+        .card .info p {
+            letter-spacing: 1px;
+            font-size: 15px;
+            margin-top: 8px;
+            text-align: center
+        }
+        .card .info button {
+    display: block;
+    margin: auto; /* Center the button horizontally */
+    padding: 0.6rem;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+
+            
+        .card .info button:hover {
+            background: dodgerblue;
+            color: white;
+        }
+    </style>
+ 
+<div class="wrapper">
+    <div class="card">
+        <img src="/img/t1.jpg"/>
+        <div class="info">
+            <h1>BRAIN BUSTER</h1>
+            <p>Quiz testing knowledge and understanding through a series of questions, promoting active learning and critical thinking in an interactive format.</p>
+            <a href="/view/t1.html" style="text-decoration: none;"> <button>Read More</button></a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="/img/t2.jpg"/>
+        <div class="info">
+            <h1>CIRCUIT DEBUGGING</h1>
+            <p>Circuit debugging identifying and fixing electronic issues for optimal functionality requires technical expertise, problem-solving skills and attention to detail.</p>
+            <a href="/view/t2.html" style="text-decoration: none;"><button>Read More</button></a>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="/img/t333.jpg"/>
+        <div class="info">
+            <h1>CLASH OF THE MINDS</h1>
+            <p>Debate engaging in structured discussions to explore diverse perspectives, exchange ideas and critically analyze arguments to reach informed conclusions</p>
+            <a href="/view/t3.html" style="text-decoration: none;"> <button>Read More</button></a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="/img/t44.jpg"/>
+        <div class="info">
+            <h1>PAPER PRESENTATION</h1>
+            <p>Paper presentation delivering structured talks to share research findings, insights, or ideas, aiming to inform and engage audiences with a clear, concise and compelling narrative</p>
+            <a href="/view/t4.html" style="text-decoration: none;"> <button>Read More</button></a>
+        </div>
+    </div>
+</div>
+
+</div> <br> <br>
+  
+
+    
+      <!-- Non-technical events content here -->
+    
+    <div id="aboutdiv" class="container">
+      <div id="non-technical-events">
+        <h2  class="extraBold gradient0" style="text-align: center; color: rgb(234, 255, 0);font-weight: bolder; font-style: normal;
+        font-size: 25px;
+        background: linear-gradient(to right, #004084, #ac48db);
+        padding: 10px;
+        border-radius: 5px; display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            ">Non-Techincal Events</h2> </div> </div>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            display: flex;
+            flex-direction: column; /* Updated to column layout */
+            align-items: center;
+            justify-content: center;
+         
+        }
+
+        header {
+            font-style: italic;
+            font-size: 40px;
+            color: white;
+            font-weight: bolder; 
+            -webkit-text-stroke: 2px;
+            margin-bottom: 20px; /* Added space below the header */
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            width: 70%;
+            justify-content: space-between;
+        }
+
+        .card {
+            width: 280px;
+            height: 360px;
+            border-radius: 5px;
+            padding: 1.5rem;
+            background: rgb(0, 0, 0);
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            transition: 0.4s ease-out;
+            box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        .card:nth-child(1),
+        .card:nth-child(2),
+        .card:nth-child(3),
+        .card:nth-child(4),
+        .card:nth-child(5) {
+            width: 280px;
+            height: 360px;
+            margin-top: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(20px);
+        }
+
+        .card:hover:before {
+            opacity: 1;
+        }
+
+        .card:hover .info {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        .card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2;
+            transition: 0.5s;
+            opacity: 0;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 1px;
+        }
+
+        .card .info {
+            position: relative;
+            z-index: 3;
+            color: white;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.5s;
+        }
+
+        .card .info h1 {
+            margin: 0px;
+        }
+
+        .card .info p {
+            letter-spacing: 1px;
+            font-size: 15px;
+            margin-top: 8px;
+        }
+
+        .card .info button {
+            padding: 0.6rem;
+            outline: none;
+            border: none;
+            border-radius: 3px;
+            background: white;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.4s ease;
+        }
+
+
+        .card .info button:hover {
+            background: dodgerblue;
+            color: white;
+        }
+
+        .card.show-your-talent {
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .card.show-your-talent {
+        margin: 20px auto; /* Adjust margin as needed for smaller screens */
+    }
+}
+
+    </style>
+
+
+<div class="wrapper">
+  <div class="card">
+      <img src="/img/n1.jpg" alt="">
+      <div class="info">
+          <h1>FOOD FEAST</h1>
+          <p>Get ready to feast on a variety of tasty treats at our Food Fest!  Come hungry and discover a world of delicious flavors waiting to be explored.</p>
+          <a href="/view/n1.html" style="text-decoration: none;"> <button>Read More</button></a>
+      </div>
+  </div>
+  <div class="card">
+      <img src="/img/n222.png" alt=""/>
+      <div class="info">
+          <h1>HALL OF WAR</h1>
+          <p>A strategic board game played between two opponents, each aiming to outmaneuver the other's pieces to achieve checkmate, requiring foresight, calculation and tactical skill</p>
+          <a href="/view/n2.html" style="text-decoration: none;"> <button>Read More</button></a>
+      </div>
+  </div>
+
+  <div class="card show-your-talent">
+      <img src="/img/n3.jpg" alt=""/>
+      <div class="info">
+          <h1>SHOW YOUR TALENT</h1>
+          <p>Step into a world of talent at 'Show Your Talent' event, where singing, photography, silambam, dance, and more collide in an explosion of creativity and passion!</p>
+          <a href="/view/n3.html" style="text-decoration: none;"> <button>Read More</button></a>
+      </div>
+  </div>
+</div>
+
+
+</div>
+
+</div> <br> <br>
+
+
+<style>
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+  }
+  .center img {
+    max-width: 1000%; /* Adjust the width as needed */
+    max-height: 80vh; /* Adjust the height as needed */
+    height: 35vh;
+    width: 40vh;
+  }
+</style>
+
+
+
+  <!-- ABOUT CRESCENT -->
+
+
+  <div id="aboutdiv" class="container">
+    <div id="about">
+      <h2 class="extraBold gradient0" style="text-align: center; color: rgb(234, 255, 0); background: linear-gradient(to right, #004084, #ac48db);font-weight: bolder;">About Crescent</h2>
+      <div class="center">
+        <div id="slideshow">
+          <img src="img/cres1.jpeg" alt="CES Image" class="slides no-hover-effect">
+          <img src="img/cres2.jpeg" alt="CES Image" class="slides no-hover-effect">
+          <img src="img/cres3.jpeg" alt="CES Image" class="slides no-hover-effect">
+       
+        </div>
+      </div>
+    </div>
+    <p class="columnText" style="color: rgb(255, 255, 255);font-weight: bolder; text-align: justify;">
+      Established in 1984, B.S. Abdur Rahman Crescent Institute of Science and Technology, situated in Chennai near Tambaram, is a distinguished institution with a 38-year legacy of academic excellence. Our intellectual hub challenges conventional thinking, fostering a passion for redefining learning. With top- notch education, a green campus, and vibrant student life, we provide a conducive environment for holistic development.
+     Our diverse educational programs and student development clubs create a community that nurtures personal and professional growth, making our institution a lifelong home.
+    </p>
+  </div>
+  
+    </div><br><br><br>
+    <script>
+      let slideIndex = 0;
+carousel();
+
+function carousel() {
+  let i;
+  const slides = document.getElementsByClassName("slides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+    </script>
+
+
+<!--GENERAL GUIDLINES-->
+
+
+    <div class="container">
+      <section id="general guidlines">
+    <h2  class="extraBold gradient0" style="text-align: center; color: rgb(234, 255, 0); background: linear-gradient(to right, #004084, #ac48db);font-weight: bolder;">General Guidlines</h2> 
+    <div class="newExtraBold" style="text-align: justify; color: rgb(255, 255, 255);font-weight: bolder;" style="width:max-content;max-width:90%;margin:auto;position:relative;z-index: 10001;" > 
+        <li>Free registration for the entire event except Food Feast</li>
+        <li>Only registered participants will be allowed to attend the event , on spot registrations will not be entertained.</li>
+        <li> It is mandatory for the participants to provide their college ID at the help desk for verification.</li>
+        <li>Proper dress code should be followed by the participants.</li>
+        <li>A participant is not restricted to participation in any number of events as long as the event timings do not clash.</li>
+        <li>All the events will commence at the scheduled time, participants are requested to be punctual.</li>
+        <li>Participants are requested to collect the event tag from the help desk present in the ES block.</li>
+        <li>No refund on the registration fees will be encouraged.</li>
+        <li>Students should refrain from using abusive language, obscene display and maintain good decorum.</li>
+        <li>Smoking, consumption of alcohol or any such substance is strictly prohibited inside the college premises.</li>
+                 <li>Rules are subject to changes at the discretion of the management or the event organisers.</li>
+
+    </div></section><br><br> 
+  
+    <!-- Co ordinator List -->
+
+    <style>
+        body {
+            background-color: #f3ebeb;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .myHeader {
+            text-align: center;
+            color: rgb(234, 255, 0);
+            font-weight: bolder;
+        }
+    
+        .extraBold {
+            font-weight: bolder;
+        }
+    
+        .gradient0 {
+          background: linear-gradient(to right, #004084, #ac48db);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: stretch; /* Align items to stretch equally */
+            margin-top: 20px;
+        }
+    
+        .col-md-4 {
+            text-align: center;
+        }
+    
+        /* Updated class names */
+        .newHeader {
+            text-align: center;
+            color: rgb(230, 231, 219);
+            font-weight: bolder;
+        }
+    
+        .jaha:nth-child(odd) {
+            margin-right: 75px;
+        }
+    
+        .newExtraBold {
+            font-weight: bolder;
+            color: #fff;
+        }
+    </style>
+
+  
+  <div style="color: white;" class="row d-flex justify-content-center">
+      <div class="col-md-4 text-center">
+          <!-- Student Co-ordinators -->
+          <h5 class="extraBold gradient0" style="color: yellow;">Student Co-ordinators</h5><br>
+          <h5 class="extraBold"><img src="img/sabiq.jpg" class="no-hover-effect" style="border-radius: 50%; width: 150px; height: 150px;"> <br>MOHAMMED SABIQ A</h5><h5>General Secretary</h5><h5>Final Year EEE</h5><br>
+          <h5 class="extraBold"><img src="img/naveen.jpg" class="no-hover-effect" style="border-radius: 50%; width: 150px; height: 150px;"> <br>NAVEEN VIJAY B </h5><h5>Joint Secretary</h5><h5>Final Year EEE</h5><br>
+  
+      </div>
+      <div class="col-md-4 text-center">
+        <!-- Website Developed By -->
+        <h5 class="extraBold gradient0" style="color: yellow;">Designed By</h5><br>
+        <h5 class="extraBold"><img src="img/shoib.jpeg" class="no-hover-effect" style="border-radius: 50%; width: 150px; height: 150px;"> <br>SHOAIB A</h5><h5>Pre-Final Year EEE</h5><br>
+    </div>
+    <div class="col-md-4 text-center">
+      <!-- Website Developed By -->
+      <h5 class="extraBold gradient0" style="color: yellow;">Website Developed By</h5><br>
+      <h5 class="extraBold"><a href="https://www.linkedin.com/in/mageshkumar-k-406308216?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><img src="img/Mageshkumar_K.jpg" class="no-hover-effect" style="border-radius: 50%; width: 150px; height: 150px;"></a> <br>MAGESHKUMAR K</h5><h5>Final Year EEE</h5><br>
+      <h5 class="extraBold"><a href="https://www.linkedin.com/in/jahangerj"><img src="img/ja.jpeg" class="no-hover-effect" style="border-radius: 50%; width: 150px; height: 150px;"></a> <br>JAHANGER J</h5><h5>Pre-Final Year EEE</h5><br>
+      <h5 class="extraBold"><a href="https://www.linkedin.com/in/rahul-a-924133268?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><img src="img/rahul.jpeg" class="no-hover-effect" style="border-radius: 50%; width: 150px; height: 150px;"></a> <br>RAHUL A</h5><h5>Pre-Final Year EEE</h5><br>
+  </div>
+  
+  <br><br>
+
+  <div class="myfooter">
+    <span class="footer" style="display: block; color: rgb(255, 255, 255); margin: auto; font-weight: 600; width: max-content; max-width: 90%; text-align: center;">CO-Sponsored by</span><br><br>
+    <div style="display: flex; justify-content: center;">
+        <img src="img/sp2.png" alt="" class="no-hover-effect" style="display: block; width: 240px; height: 100px; max-width: 33%; margin: auto;" />
+        <img src="img/sp1.png" alt="" class="no-hover-effect" style="display: block; width: 240px; height: 100px; max-width: 33%; margin: auto;" />
+        <img src="img/sp3.png" alt="" class="no-hover-effect" style="display: block; width: 240px; height: 100px; max-width: 33%; margin: auto;" />
+    </div>
+    <br>
+</div>
+
+
+
+<!--FOR removing the WEBHOST IMG-->
+
+<style>
+  img[src="https://www.000webhost.com/static/default.000webhost.com/images/powered-by-000webhost.png"]
+        {
+            display:none;
+        }
+</style>
+
+
+    <script src="/static/vendors/counter/flipdown.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    
+    <link rel="icon" type="image/x-icon" href="../static/img/rogo.png">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap" rel="stylesheet">
+    <link href="/static/vendors/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/static/css/skin.css" rel="stylesheet" />
+    <link href="/static/css/notPC.css" rel="stylesheet" />
+    <link href="/static/vendors/counter/flipdown.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="font/font.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Bungee+Shade&family=Honk&family=Kaushan+Script&family=Kdam+Thmor+Pro&family=Luckiest+Guy&family=Rock+Salt&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Bungee+Shade&family=Honk&family=Kaushan+Script&family=Kdam+Thmor+Pro&family=Luckiest+Guy&family=Rock+Salt&family=Rubik+Doodle+Shadow&family=Timmana&display=swap" rel="stylesheet">
+     
+    <style>
+        .bungee-shade-regular {
+    font-family: "Bungee Shade", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    }
+    
+    </style>
+</body>
+
+  </html>
+
+
+
+
+
+
+
+
+

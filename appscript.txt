@@ -1,0 +1,58 @@
+ function testPermissions() {
+   var sheet = SpreadsheetApp.openById('1AJqrH9BZFwtiSZ3hpA3ou64chT4eQo9bxn66QI5mS-Q');
+   Logger.log("Spreadsheet name: " + sheet.getName());
+ }
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.openById('1AJqrH9BZFwtiSZ3hpA3ou64chT4eQo9bxn66QI5mS-Q').getActiveSheet();
+    
+    // Check if required parameters are present
+    if (!e || !e.parameters || !e.parameters.fullName || !e.parameters.email || !e.parameters.phone || !e.parameters.college || !e.parameters.collegeId || !e.parameters.department || !e.parameters.upiId || !e.parameters.transactionNumber) {
+      throw new Error("Incomplete form data.");
+    }
+    
+    // Prepare row data
+    var rowData = [
+      new Date(), // Timestamp
+      e.parameters.fullName[0], // Full Name
+      e.parameters.email[0], // Email
+      e.parameters.phone[0], // Phone Number
+      e.parameters.college[0], // College
+      e.parameters.collegeId[0], // College ID
+      e.parameters.department[0], // Department
+      // Initialize event columns with "NO"
+      "NO", "NO", "NO", "NO", "NO", "NO", "NO", "NO", "NO", "NO",
+      e.parameters.upiId[0], // UPI ID
+      e.parameters.transactionNumber[0] // Transaction Number
+    ];
+    
+    // Check if events were selected
+    if (e.parameters.hasOwnProperty('events[]')) {
+      var events = e.parameters['events[]'];
+      events.forEach(function(event) {
+        // Extract the event number from the value
+        var eventNumber = event.split(' ')[1];
+        rowData[parseInt(eventNumber) + 6] = "YES"; // Offset by 6 to start from column G (index 6)
+      });
+    }
+    
+    // Check if combo pack was selected
+    if (e.parameters.hasOwnProperty('comboPack')) {
+      rowData[16] = "YES"; // Column Q (index 16) represents the combo pack
+    } else {
+      rowData[16] = "NO"; // If combo pack was not selected
+    }
+    
+    // Insert data into the sheet
+    sheet.appendRow(rowData);
+    
+    // Return success response
+    return ContentService.createTextOutput(JSON.stringify({message: 'Registration successful!'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    console.error(error);
+    // Return error response
+    return ContentService.createTextOutput(JSON.stringify({message: 'An error occurred. Please try again later.'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
