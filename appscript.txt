@@ -1,4 +1,6 @@
- function testPermissions() {
+//***
+
+function testPermissions() {
    var sheet = SpreadsheetApp.openById('1AJqrH9BZFwtiSZ3hpA3ou64chT4eQo9bxn66QI5mS-Q');
    Logger.log("Spreadsheet name: " + sheet.getName());
  }
