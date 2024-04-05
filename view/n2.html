@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" href=
+"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+</link>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha384-d6sYACqUZ9+ZUZJrW8BRHduPQlTtuIFs2w3PrqGfsJr7zA8IH1ZAgY7u98JHCOYWL" crossorigin="anonymous">
+  
+    <style> 
+      .move_right {
+        /* ... */
+        z-index: 1; /* Adjust as needed */
+      }
+    
+      /* Adjust z-index for other elements if necessary */
+    
+      #herotext,
+      #img_part,
+      .countdown-body,
+      .container,
+      .wrapper,
+      .myfooter {
+        z-index: 2; /* Adjust as needed */
+      }
+    
+      .background-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1; /* Ensure the image is behind other content */
+      }
+    </style>
+    
+    <img class="background-image" src="/img/back1.jpg" alt="Background Image">
+    
+    <!-- Your other HTML content goes here -->
+ 
+ <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #ffffff;
+      padding: 2rem;
+      background-color: #ffffff;
+      background-image: url('background-image.jpg');
+      background-size: cover;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 1000px rgba(144, 0, 53, 0.888);
+    }
+
+    h1, h2 {
+      font-weight: bold;
+      margin-top: 1.5rem;
+      color: #ffffff;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: #fffefe;
+    }
+
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    button {
+      background-color: #2474d0; /* Nylon color */
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #35aec1; /* Darker Nylon color on hover */
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+    }
+
+    .hover-effect:hover {
+      transform: scale(1.05);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .icon {
+      font-size: 2rem;
+      margin-right: 0.5rem;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+    <style>
+        .nylon-box {
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 20px rgba(19, 211, 232, 0.3);
+          background: linear-gradient(to right,  #451d30db, #bc0505d2); /* Adjust the background color as needed */
+          margin-bottom: 20px; /* Add margin between the boxes */
+        }
+      </style>
+    
+ 
+        <div class="container">
+          <h1 class="bungee-shade-regular " style="text-align: center;">HALL OF WAR</h1>
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <div class="grid-container">  <img src="/img/hallofwar1.png" alt="" style="height: 360px; width: 280px;">
+            <img src="/img/hallofwar2.png" alt="" style="height: 360px; width: 280px;"></div>
+          </div >
+      <br><br><br>
+      
+        <div class="grid-container">      
+          <!-- Nylon Box for Event Details -->
+          <div class="hover-effect nylon-box">
+            <h2 class="luckiest-guy-regular">Event Details</h2>
+            <ul class="timmana-regular">
+              <li><strong>Event:</strong> Hall Of War</li>
+              <li><strong>Entry Free!!!</strong> </li>
+              <li><strong>Date:</strong> 25th April 2024</li>
+              <li><strong>Team Size:</strong> Solo Event</li>
+              <li><strong>Venue:</strong> Online</li>
+              <li><strong>Timings:</strong>  1:30-2:30 p.m.</li>
+              <li><strong>Duration:</strong> 60 min</li>
+            
+            </ul>
+            <a href="https://forms.gle/nTVgsgpdrahoPhew9">   <button class="hover-effect">Register Now</button> </a>
+          </div>
+      
+ 
+      
+          <!-- Nylon Box for Student Coordinators -->
+          <div class="hover-effect nylon-box">
+            <h2 class="luckiest-guy-regular">Student Coordinators</h2>
+           <ul class="timmana-regular"> <li>Anandakrishnan-9003153172</li>
+            <li>Vinith Kumar-7645925746</li> </ul>
+          </div>
+        </div>
+      
+ 
+  <!-- ... Remaining HTML code ... -->
+  
+    <h2 class="luckiest-guy-regular">Rules and Regulations</h2>
+    <ul class="timmana-regular">
+      <li> Website used - Li-Chess </li>
+      <li>Time Limit : 4 mins per match per player</li>
+      <li> You can try the website using link - https://lichess.org/</li>
+      <li> Individual will be matched automatically by the online system </li>
+      <li> Win as many matches as possible to get the top title </li>
+      <li>  !!!! Suggestion <---> Signup/Login to your Li-Chess account </li>
+    </ul>
+  </div>
+ 
+  <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        background-color: #111;
+    }
+
+    img {
+        width: 150px;
+        height: 150px;
+        transition: transform 0.5s, filter 0.5s;
+        cursor: pointer;
+    }
+
+    img:hover {
+        transform: scale(1.2);
+        filter: brightness(1.5) drop-shadow(0 0 10px rgba(0, 255, 255, 0.8));
+    }
+</style>
+<script>
+function zoomAndLight() {
+const image = document.querySelector('img');
+image.style.transform = 'scale(1.2)';
+image.style.filter = 'brightness(1.5) drop-shadow(0 0 10px rgba(0, 255, 255, 0.8))';
+}
+</script>
+
+<!--FOR removing the WEBHOST IMG-->
+
+<style>
+  img[src="https://www.000webhost.com/static/default.000webhost.com/images/powered-by-000webhost.png"]
+        {
+            display:none;
+        }
+</style>
+
+</body>
+
+</html>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anta&family=Bungee+Shade&family=Honk&family=Kaushan+Script&family=Kdam+Thmor+Pro&family=Luckiest+Guy&family=Rock+Salt&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anta&family=Bungee+Shade&family=Honk&family=Kaushan+Script&family=Kdam+Thmor+Pro&family=Luckiest+Guy&family=Rock+Salt&family=Rubik+Doodle+Shadow&family=Timmana&display=swap" rel="stylesheet">
+ 
+<link rel="stylesheet" href="/font/font.css" type="text/css">
